@@ -93,8 +93,8 @@ dependencies {
 
 shadowJar {
     archiveBaseName = 'enactment-engine-all'
-    archiveClassifier = null
     zip64 true
+    archiveClassifier = null
     archiveVersion = null
 }
 

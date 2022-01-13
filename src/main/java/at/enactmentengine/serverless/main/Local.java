@@ -5,6 +5,7 @@ import at.uibk.dps.cronjob.ManualUpdate;
 import at.uibk.dps.databases.MongoDBAccess;
 import at.uibk.dps.util.Type;
 import ch.qos.logback.classic.Level;
+import jContainer.helper.LocalFileCleaner;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.bson.Document;
@@ -27,6 +28,7 @@ import java.util.Map;
  * <p>
  * based on @author markusmoosbrugger, jakobnoeckl extended by @author stefanpedratscher; extended again as a part of
  * the simulator by @author mikahautz
+ * further extended with thesis 'jContainer' by @author albertneuener & davidbaumgartner
  */
 public class Local {
 
@@ -39,6 +41,11 @@ public class Local {
      * Indicates whether the connection to the DB should be closed at the end.
      */
     private static boolean close = true;
+
+    /**
+     * Deletes every created file from jContainer during runtime.
+     */
+    private static LocalFileCleaner cleaner = new LocalFileCleaner();
 
     /**
      * Starting point of the local execution.
@@ -114,6 +121,8 @@ public class Local {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            cleaner.cleanDirectories();
+
             try {
                 MongoDBAccess.addAllEntries();
                 if (close) {

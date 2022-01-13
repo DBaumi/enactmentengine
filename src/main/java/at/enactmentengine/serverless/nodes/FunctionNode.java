@@ -274,7 +274,7 @@ public class FunctionNode extends Node {
      */
     private PairResult<String, Long> invokeFunction(Function functionToInvoke, String resourceLink, Map<String, Object> functionInputs, Map<String, Object> functionOutputs)
             throws MaxRunningTimeException, LatestFinishingTimeException, LatestStartingTimeException,
-            InvokationFailureException, IOException {
+            InvokationFailureException, Exception {
         String resultString = null;
         PairResult<String, Long> pairResult = null;
 
