@@ -465,7 +465,7 @@ public class FunctionNode extends Node {
             // FileUtils.readFileToByteArray(new File(workflow))
             awsAccessKey = propertiesFile.getProperty("aws_access_key");
             awsSecretKey = propertiesFile.getProperty("aws_secret_key");
-            if (propertiesFile.containsKey("aws_session_token")) {
+            if (!jContainer.helper.Utils.isNullOrEmpty(propertiesFile.getProperty("aws_session_token"))) {
                 awsSessionToken = propertiesFile.getProperty("aws_session_token");
             }
         } catch (Exception e) {
